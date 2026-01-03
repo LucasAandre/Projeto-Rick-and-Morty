@@ -7,7 +7,7 @@ class RickMorty:
     data_base = 'database/avaliacoes.json'
    
     @classmethod
-    def personagens(cls, escolha: str):
+    def escolha(cls, escolha: str):
         response = requests.get(f'{cls.url}/{escolha}')
 
         if response.status_code != 200:
@@ -24,3 +24,15 @@ class RickMorty:
             })
 
         return personagens
+
+    @classmethod
+    def busca_personagem(cls, id: int):
+        escolha = 'character'
+        personagens = cls.escolha(escolha)
+        
+        personagem = next((p for p in personagens if p['id'] == id), None)
+
+        if personagem:
+            return personagem
+            
+        return {'erro': f'Personagem com ID {id} não encontrado.'}
