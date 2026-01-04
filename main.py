@@ -13,7 +13,7 @@ def escolha(escolha: str):
 
     return {
         'escolha': escolha,
-        'personagens': informacao
+        'dados': informacao
     }
 
 # BUSCA POR ID
@@ -23,7 +23,7 @@ def escolha(escolha: str):
 
 @app.get('/api/rickandmorty/busca/{id}')
 def busca_personagem(id: int):
-    if id < 0 or id > 20:
+    if id < 1 or id > 20:
         return {'Erro': 'Opção inválida! Digite números entre 1 e 20'}
     
     busca = RickMorty.busca_personagem(id)
@@ -31,4 +31,27 @@ def busca_personagem(id: int):
     return {
         'escolha': id,
         'personagem': busca
+    }
+
+# http://127.0.0.1:8000/api/rickandmorty/1/avaliar?nota=9&comentario=Otimo+comeco
+@app.get('/api/rickandmorty/{episodio}/avaliar')
+def avaliar_episodio(episodio: int, nota: float, comentario: str):
+    if episodio < 1 or episodio > 20:
+        return {'Erro': f'Episódio {episodio} inexistente!'}
+
+    RickMorty.nova_avaliacao(episodio, nota, comentario)
+
+    return {
+        'episodio': episodio,
+        'nota': nota,
+        'comentario': comentario
+    }
+
+@app.get('/api/rickandmorty/avaliacoes/{episodio}')
+def listar_avaliacoes(episodio: int):
+    avaliacoes = RickMorty.listar_avaliacoes(episodio)
+
+    return {
+        'episodio': episodio,
+        'avaliacoes': avaliacoes
     }

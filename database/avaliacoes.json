@@ -1,0 +1,17 @@
+[
+    {
+        "episodio": 15,
+        "nota": 9.5,
+        "comentario": "Muito engraçado!"
+    },
+    {
+        "episodio": 1,
+        "nota": 9.0,
+        "comentario": "Otimo comeco"
+    },
+    {
+        "episodio": 1,
+        "nota": 10.0,
+        "comentario": "Eu achei ótimo!"
+    }
+]
